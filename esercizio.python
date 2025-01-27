@@ -1,1 +1,146 @@
+Vai ai contenuti principali
+Google Classroom
+Classroom
+Informatica
+3A Info
+Home page
+Calendario
+I tuoi corsi
+Da fare
+L
+Letteratura e Metaverso
+3
+3A INFO MATEMATICA
+3
+3A INFO - TELE - P_MAIO - A_PARISI
+2024 - 25
+C
+CREATIVE ROBOTICS SENSORS
+I
+Inglese 3 A Info
+2
+2024-2025 III A - Italiano/Storia
+3
+3 A INFO 24 25 IRC
+M
+MAT 3A INF
+3Ainf
+3
+3A INFO - Sistemi e Reti 2024/2025
+3Ai
+I
+Informatica
+3A Info
+3
+3A info tpsit 24/25
+3A info
+D
+Diritto ed EP
+2 A IT anno 2023/2024
+S
+SCIENZE MOTORIE
+2 A IT
+B
+BIOLOGIA
+2AIT
+L
+Lettere
+2A IT
+F
+FISICA 2A IT 2023/2024
+IT
+2
+2A IT - STA 23/24
+2
+2 Ait_23-24_Matematica
+Corsi archiviati
+Impostazioni
+14. Mastermind [👤/👥]
+14. Mastermind [👤/👥]
+Marco Farina
+•
+10 dic 2024
+100 punti
+Consegna: 3 gen, 23:59
+L'esercizio può essere svolto da soli o a coppie. In caso sia svolto a coppie tutti i membri del gruppo devono consegnare l'esercizio e indicare in un commento privato chi è il compagno di classe.
 
+Link
+https://rainbowbits.notion.site/Mastermind-14b9e6ebabc8801e9829da9c898e12c7?pvs=4
+/20
+/2
+/2
+/8
+/3
+/5
+Commenti sul corso
+Il tuo lavoro
+Consegnato in ritardo
+
+mastermind.py
+Testo
+Commenti privati
+#Leonardo Gandini
+#3A INFO
+
+import random
+
+def genera_sequenza_segreta(dimensione, minimo, massimo):
+    return random.sample(range(minimo, massimo + 1), dimensione)
+
+
+def leggi_sequenza_utente(dimensione):
+    while True:
+        try:
+            sequenza = list(map(int, input(f"Inserisci la tua sequenza di {dimensione} numeri (tra 1 e 6), separati da spazio: ").split()))
+            if len(sequenza) == dimensione and all(1 <= num <= 6 for num in sequenza):
+                return sequenza
+            print(f"La sequenza deve contenere {dimensione} numeri tra 1 e 6.")
+        except ValueError:
+            print("Inserisci solo numeri validi.")
+
+
+def calcola_feedback(segreta, tentativo):
+    giusti_posizione = sum(1 for i in range(len(segreta)) if segreta[i] == tentativo[i])
+    giusti_sbagliata_posizione = sum(1 for num in tentativo if num in segreta) - giusti_posizione
+    return giusti_posizione, giusti_sbagliata_posizione
+
+
+def scegli_difficolta():
+    difficolta = input("Scegli la difficoltà (Facile, Intermedio, Difficile): ").lower()
+    if difficolta == "facile": return 15
+    if difficolta == "intermedio": return 10
+    if difficolta == "difficile": return 7
+    print("Scelta non riuscita. Scegli tra 'Facile', 'Intermedio' o 'Difficile'.")
+    return scegli_difficolta()
+
+
+def gioca_partita(max_tentativi):
+    dimensione = 4
+    segreta = genera_sequenza_segreta(dimensione, 1, 6)
+    print("Comincia il gioco! Devi indovinare la sequenza segreta di 4 numeri tra 1 e 6.")
+    
+    for tentativi in range(max_tentativi):
+        tentativo = leggi_sequenza_utente(dimensione)
+        giusti_posizione, giusti_sbagliata_posizione = calcola_feedback(segreta, tentativo)
+        
+        print(f"Giusti al posto giusto: {giusti_posizione}, giusti al posto sbagliato: {giusti_sbagliata_posizione}")
+        
+        if giusti_posizione == dimensione:
+            print(f"Hai vinto La sequenza giusta era {segreta}.")
+            return
+        
+        print(f"tentativi rimanentii: {max_tentativi - tentativi - 1}")
+    
+    print(f"Hai esaurito tutti i tentativi! La sequenza segreta era {segreta}.")
+
+
+def main():
+    print("Benvenuto in Mastermind!")
+    max_tentativi = scegli_difficolta()
+    gioca_partita(max_tentativi)
+    print("Grazie per aver giocato!")
+
+
+main()
+mastermind.py
+Visualizzazione di mastermind.py.
